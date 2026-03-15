@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FF BATTLE ZONE</title>
+    <style>
+        :root { --primary: #d12053; --bg: #f9f9f9; --card-bg: #ffffff; }
+        body { font-family: 'Arial', sans-serif; background: var(--bg); margin: 0; padding: 0; color: #333; }
+
+        /* Header */
+        .header { background: #fff; padding: 15px; text-align: center; font-weight: bold; border-bottom: 1px solid #ddd; position: sticky; top: 0; z-index: 100; }
+
+        /* Banner Slider Simulation */
+        .banner-box { padding: 10px; }
+        .banner-box img { width: 100%; border-radius: 15px; display: block; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+
+        /* Section Title */
+        .section-title { padding: 10px 20px; font-weight: bold; font-size: 18px; color: #444; text-transform: uppercase; border-left: 5px solid var(--primary); margin: 10px 0; }
+
+        /* Tournament Grid */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 15px; }
+        .card { background: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid #eee; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .card img { width: 100%; height: 110px; object-fit: cover; }
+        .card-body { padding: 10px; text-align: left; }
+        .card-body h3 { margin: 0; font-size: 14px; color: #222; }
+        .card-body p { margin: 5px 0; font-size: 12px; color: #777; }
+        .join-btn { width: 100%; background: #eef2f7; color: #333; border: 1px solid #ddd; padding: 8px; border-radius: 5px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .join-btn:active { background: var(--primary); color: white; }
+
+        /* --- Payment Interface (Hidden by Default) --- */
+        #payment-page { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 200; overflow-y: auto; padding-bottom: 50px; }
+        .pay-tabs { display: flex; justify-content: space-around; padding: 20px; background: #fff; }
+        .pay-tab { border: 1px solid #ddd; padding: 10px; border-radius: 8px; width: 30%; text-align: center; }
+        .pay-tab img { height: 25px; }
+        .pay-tab.active { border: 2px solid var(--primary); }
+
+        .pay-container { background: var(--primary); color: white; margin: 15px; padding: 20px; border-radius: 15px; text-align: center; }
+        .trx-input { width: 100%; padding: 15px; margin: 15px 0; border-radius: 8px; border: none; font-size: 16px; box-sizing: border-box; }
+        .num-copy { background: rgba(0,0,0,0.2); padding: 10px; border-radius: 20px; display: inline-flex; gap: 10px; font-weight: bold; margin: 10px 0; }
+
+        /* Bottom Nav */
+        .nav { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #eee; }
+        .nav-item { text-align: center; font-size: 11px; color: #888; text-decoration: none; }
+        .nav-item.active { color: #6c5ce7; }
+    </style>
+</head>
+<body>
+
+<div id="home-page">
+    <div class="header">FREE FIRE</div>
+
+    <div class="banner-box">
+        <img src="https://i.ibb.co/VvW2L5F/ff-br.jpg" alt="Join Telegram">
+    </div>
+
+    <div class="section-title">FREE FIRE</div>
+
+    <div class="grid">
+        <div class="card">
+            <img src="https://i.ibb.co/VvW2L5F/ff-br.jpg" alt="BR">
+            <div class="card-body">
+                <h3>BR MATCH</h3>
+                <p>14 matches found</p>
+                <button class="join-btn" onclick="openPayment()">JOIN</button>
+            </div>
+        </div>
+        <div class="card">
+            <img src="https://i.ibb.co/C0f9ZpY/ff-cs.jpg" alt="CS">
+            <div class="card-body">
+                <h3>CLASH SQUAD</h3>
+                <p>10 matches found</p>
+                <button class="join-btn" onclick="openPayment()">JOIN</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav">
+        <a href="#" class="nav-item active">Play</a>
+        <a href="#" class="nav-item">My Matches</a>
+        <a href="#" class="nav-item">Results</a>
+        <a href="#" class="nav-item">Profile</a>
+    </div>
+</div>
+
+<div id="payment-page">
+    <div class="header">
+        <span style="float: left; padding-left: 15px; cursor:pointer" onclick="closePayment()">← Back</span>
+        Payment Info
+    </div>
+
+    <div class="pay-tabs">
+        <div class="pay-tab active"><img src="https://itshm.com/wp-content/uploads/2021/05/bkash-logo-01.png"></div>
+        <div class="pay-tab"><img src="https://i.ibb.co/L8yNf5V/rocket.png"></div>
+        <div class="pay-tab"><img src="https://i.ibb.co/f4pY4s9/nagad.png"></div>
+    </div>
+
+    <div class="pay-container">
+        <h4>ট্রানজেকশন আইডি দিন</h4>
+        <input type="text" id="trxID" class="trx-input" placeholder="ট্রানজেকশন আইডি দিন">
+        
+        <div style="text-align: left; font-size: 13px;">
+            <p>1. *247# অথবা অ্যাপ থেকে Send Money করুন।</p>
+            <p>2. নিচে দেওয়া নাম্বারে টাকা পাঠান:</p>
+            <div style="text-align: center;">
+                <div class="num-copy">
+                    <span>01921548532</span>
+                    <button onclick="copyNum()" style="border:none; border-radius:5px; padding:2px 10px; cursor:pointer">Copy</button>
+                </div>
+            </div>
+            <p>3. টাকা পাঠিয়ে TrxID এখানে দিয়ে ভেরিফাই করুন।</p>
+        </div>
+    </div>
+    
+    <div style="padding: 0 15px;">
+        <button class="join-btn" style="background:var(--primary); color:white; padding:15px; border:none; font-size:16px" onclick="verify()">VERIFY</button>
+    </div>
+</div>
+
+<script>
+    function openPayment() {
+        document.getElementById('home-page').style.display = 'none';
+        document.getElementById('payment-page').style.display = 'block';
+    }
+
+    function closePayment() {
+        document.getElementById('home-page').style.display = 'block';
+        document.getElementById('payment-page').style.display = 'none';
+    }
+
+    function copyNum() {
+        navigator.clipboard.writeText("01921548532");
+        alert("Number Copied!");
+    }
+
+    function verify() {
+        let id = document.getElementById('trxID').value;
+        if(id === "") {
+            alert("অনুগ্রহ করে TrxID দিন");
+        } else {
+            alert("পেমেন্ট রিকোয়েস্ট পাঠানো হয়েছে! আইডি: " + id);
+            closePayment();
+        }
+    }
+</script>
+
+</body>
+</html>
